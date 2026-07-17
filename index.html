@@ -352,7 +352,7 @@
       </section>
 
       <section class="block">
-        <div class="sec-head"><span class="sec-num">03</span><h2>Items &amp; Vendors</h2></div>
+        <div class="sec-head"><span class="sec-num">03</span><h2>Items, Vendors &amp; Decoration</h2></div>
         <div class="sec-body">
           <div class="field">
             <label>Item category <span class="hint">— check all that apply</span></label>
@@ -370,7 +370,7 @@
             </div>
           </div>
           <div class="field"><label>Category preference / notes <span class="hint">— steer the team toward a look or product family</span></label><input type="text" id="catPref" placeholder="e.g. prefer stainless drinkware over plastic"></div>
-          <div class="field" style="margin-bottom:-4px"><label>Products &amp; assigned vendors <span class="hint">— one line per product; set the vendor for each</span></label></div>
+          <div class="field" style="margin-bottom:-4px"><label>Products, vendors &amp; decoration <span class="hint">— one card per product; set product vendor, decoration method &amp; decoration vendor for each</span></label></div>
           <div id="products"></div>
           <button type="button" class="add-product" id="addProduct">+ Add another product</button>
           <datalist id="vendorList">
@@ -380,35 +380,17 @@
             <option>Logomark</option><option>SnugZ</option><option>Bag Makers</option>
             <option>Gemini</option><option>B2Sign</option>
           </datalist>
+          <datalist id="decoVendorList">
+            <option>Bear Designz</option><option>Stitch Pro</option><option>Pacific Coast Stitch</option>
+          </datalist>
           <div class="field"><label>Overall size run / breakdown notes <span class="hint">— sizes / colors / SKUs</span></label><textarea id="qtyBreak" placeholder="e.g. S:12  M:40  L:50  XL:30  2XL:12  3XL:6"></textarea></div>
         </div>
       </section>
 
       <section class="block">
-        <div class="sec-head"><span class="sec-num">04</span><h2>Decoration & Imprint</h2></div>
+        <div class="sec-head"><span class="sec-num">04</span><h2>Logo &amp; Artwork</h2></div>
         <div class="sec-body">
-          <div class="row">
-            <div class="field"><label>Imprint location</label><input type="text" id="impLoc" placeholder="e.g. Left chest + full back"></div>
-            <div class="field"><label>Imprint method <span class="hint">preferred</span></label>
-              <select id="impMethod">
-                <option value="">— select —</option>
-                <option>Screen print</option>
-                <option>Embroidery</option>
-                <option>DTF / Transfer</option>
-                <option>DTG</option>
-                <option>Heat transfer / Vinyl</option>
-                <option>Laser engrave</option>
-                <option>Pad print</option>
-                <option>Debossing</option>
-                <option>Sublimation</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="field"><label>Logo details</label><input type="text" id="logo" placeholder="e.g. vector on file / PMS 289C + 123C"></div>
-            <div class="field"><label># of imprint colors</label><input type="text" id="impColors" placeholder="e.g. 2"></div>
-          </div>
+          <div class="field"><label>Logo details <span class="hint">— shared across every product on this job</span></label><input type="text" id="logo" placeholder="e.g. vector on file / PMS 289C + 123C"></div>
         </div>
       </section>
 
@@ -573,6 +555,12 @@
   const $ = id => document.getElementById(id);
   const toggles = {firm:"NO", rush:"NO", mockup:"YES"};
 
+  /* decoration methods offered per product */
+  const METHOD_OPTS = ["Screen print","Embroidery","DTF / Transfer","DTG",
+    "Heat transfer / Vinyl","Laser engrave","Pad print","Debossing","Sublimation","Other"];
+  const methodOptionsHTML = '<option value="">— select —</option>' +
+    METHOD_OPTS.map(o=>"<option>"+o+"</option>").join("");
+
   /* ---- clock ---- */
   function stamp(d){
     const p = n => String(n).padStart(2,"0");
@@ -640,8 +628,9 @@
   function getProducts(){
     return [...document.querySelectorAll("#products .product-card")].map(c=>{
       const val = sel => { const el=c.querySelector(sel); return el ? el.value.trim() : ""; };
-      return { name:val(".p-name"), vendor:val(".p-vendor"), color:val(".p-color"), size:val(".p-size"), qty:val(".p-qty") };
-    }).filter(p => p.name||p.vendor||p.color||p.size||p.qty);
+      return { name:val(".p-name"), vendor:val(".p-vendor"), color:val(".p-color"), size:val(".p-size"), qty:val(".p-qty"),
+               method:val(".p-method"), decoVendor:val(".p-decovendor"), impLoc:val(".p-imploc"), impColors:val(".p-impcolors") };
+    }).filter(p => p.name||p.vendor||p.color||p.size||p.qty||p.method||p.decoVendor||p.impLoc||p.impColors);
   }
   function renumberProducts(){
     document.querySelectorAll("#products .product-card").forEach((c,i)=>{
@@ -656,12 +645,22 @@
         '<button type="button" class="p-remove" title="Remove this product">✕ remove</button></div>'+
       '<div class="field"><label>Product name / number</label>'+
         '<input type="text" class="p-name" placeholder="e.g. Port Authority K500 polo / #K500"></div>'+
-      '<div class="field"><label>Assigned vendor</label>'+
+      '<div class="field"><label>Product vendor <span class="hint">— supplier of the blank goods</span></label>'+
         '<input type="text" class="p-vendor" list="vendorList" placeholder="start typing — e.g. SanMar, Gemini"></div>'+
       '<div class="row three">'+
         '<div class="field"><label>Color</label><input type="text" class="p-color" placeholder="Navy"></div>'+
         '<div class="field"><label>Size</label><input type="text" class="p-size" placeholder="S–3XL"></div>'+
         '<div class="field"><label>Qty</label><input type="text" class="p-qty" placeholder="150"></div>'+
+      '</div>'+
+      '<div class="row">'+
+        '<div class="field"><label>Decoration method</label>'+
+          '<select class="p-method">'+methodOptionsHTML+'</select></div>'+
+        '<div class="field"><label>Decoration vendor <span class="hint">— who decorates it</span></label>'+
+          '<input type="text" class="p-decovendor" list="decoVendorList" placeholder="e.g. Bear Designz"></div>'+
+      '</div>'+
+      '<div class="row">'+
+        '<div class="field"><label>Imprint location</label><input type="text" class="p-imploc" placeholder="e.g. Left chest + full back"></div>'+
+        '<div class="field"><label># of imprint colors</label><input type="text" class="p-impcolors" placeholder="e.g. 2"></div>'+
       '</div>';
     card.querySelector(".p-remove").addEventListener("click",()=>{
       const cards=document.querySelectorAll("#products .product-card");
@@ -708,29 +707,32 @@
     L.push(pad("Rush", toggles.rush));
     L.push(pad("Mock-up", toggles.mockup==="YES"?"Required":"Not required"));
     L.push(line);
-    L.push("ITEMS & VENDORS");
+    L.push("ITEMS, VENDORS & DECORATION");
     L.push(pad("Category", cats()));
     if(v("catPref")) L.push(pad("Preference", v("catPref")));
+    if(v("logo")) L.push(pad("Logo (all)", v("logo")));
     const prods = getProducts();
+    const sub = (label,val)=> "       " + (label+":").padEnd(13) + (val||"—");
     if(prods.length){
       prods.forEach((p,i)=>{
+        L.push("");
         L.push("  "+(i+1)+") "+(p.name || "(unnamed product)"));
-        L.push("       Vendor:  " + (p.vendor || "— unassigned —"));
+        L.push(sub("Vendor", p.vendor || "— unassigned —"));
         const specs=[];
         if(p.color||p.size) specs.push([p.color,p.size].filter(Boolean).join(" / "));
         if(p.qty) specs.push("Qty "+p.qty);
         if(specs.length) L.push("       " + specs.join("   ·   "));
+        const deco=[];
+        if(p.method) deco.push(p.method);
+        if(p.impColors) deco.push(p.impColors+" clr");
+        L.push(sub("Decoration", deco.length?deco.join("   ·   "):""));
+        L.push(sub("Deco vendor", p.decoVendor || "— unassigned —"));
+        if(p.impLoc) L.push(sub("Location", p.impLoc));
       });
     } else {
       L.push(pad("Products", ""));
     }
     if(v("qtyBreak")) L.push(pad("Size run", v("qtyBreak").replace(/\n/g," | ")));
-    L.push(line);
-    L.push("DECORATION & IMPRINT");
-    L.push(pad("Location", v("impLoc")));
-    L.push(pad("Method", v("impMethod")));
-    L.push(pad("Logo", v("logo")));
-    L.push(pad("Imprint clrs", v("impColors")));
     L.push(line);
     L.push("PRICING & MARGINS");
     L.push(pad("Budget", v("budget")));
@@ -813,7 +815,7 @@
       if(el.type==="checkbox") el.checked=false; else el.value="";
     });
     $("mProd").value=50; $("mDeco").value=40; $("mDesign").value=30; $("mAddl").value=40;
-    $("prodType").value="Apparel"; $("impMethod").value="";
+    $("prodType").value="Apparel";
     const pc=$("products"); pc.innerHTML=""; pc.appendChild(makeProductCard()); renumberProducts();
     clearErr();
     $("shipOn").checked=false; $("shipFields").hidden=true;
@@ -901,7 +903,9 @@
     const cont=$("products"); cont.innerHTML="";
     (data.products&&data.products.length?data.products:[{}]).forEach(p=>{
       const c=makeProductCard(); cont.appendChild(c);
-      [[".p-name",p.name],[".p-vendor",p.vendor],[".p-color",p.color],[".p-size",p.size],[".p-qty",p.qty]].forEach(([s,val])=>c.querySelector(s).value=val||"");
+      [[".p-name",p.name],[".p-vendor",p.vendor],[".p-color",p.color],[".p-size",p.size],[".p-qty",p.qty],
+       [".p-method",p.method],[".p-decovendor",p.decoVendor],[".p-imploc",p.impLoc],[".p-impcolors",p.impColors]
+      ].forEach(([s,val])=>c.querySelector(s).value=val||"");
     });
     renumberProducts(); $("shipFields").hidden=!$("shipOn").checked; render();
   }
