@@ -525,16 +525,14 @@
       </div>
 
       <details class="setup">
-        <summary>Email setup — one-time, ~2 minutes</summary>
+        <summary>Email setup — powered by FormSubmit.co (free)</summary>
         <div class="setup-body">
-          To turn on auto-email from a GitHub-hosted copy, edit the <code>CONFIG</code> block near the top of this file's script, then commit:
+          Jobs email the team via <a href="https://formsubmit.co" target="_blank" rel="noopener">FormSubmit.co</a> — free, no account, multiple recipients. To change who gets jobs, edit the <code>RECIPIENTS</code> list in the <code>CONFIG</code> block near the top of this file's script (comma-separated), then commit.
           <ol>
-            <li>Go to <a href="https://web3forms.com" target="_blank" rel="noopener">web3forms.com</a> and create a free access key using <b>your own email</b> (you'll get a copy of every job).</li>
-            <li>Paste the key into <code>WEB3FORMS_ACCESS_KEY</code>.</li>
-            <li>Put your team's real addresses in <code>TEAM_EMAILS</code>, comma-separated — they're CC'd on every send.</li>
-            <li>Commit &amp; push. Hit <b>Send test</b> above to confirm it lands.</li>
+            <li><b>One-time activation:</b> the first time a job is sent, FormSubmit emails a <b>"Confirm your email"</b> link to the <b>first</b> address in <code>RECIPIENTS</code>. Someone at that inbox clicks it once.</li>
+            <li>After that, every send goes to all recipients automatically. Hit <b>Send test</b> above to confirm.</li>
           </ol>
-          The page is public, so the key is visible in the source — that's normal for Web3Forms. If it ever gets abused, regenerate the key or put the page behind a login (e.g. Cloudflare Access).
+          No API key is stored in this page. If you change recipients, the new first address must confirm once again.
         </div>
       </details>
     </div>
@@ -552,16 +550,17 @@
   "use strict";
 
   /* ============================================================
-     EMAIL SETUP  —  edit these lines, then commit to GitHub.
-       1. Free access key (30 sec):  https://web3forms.com
-          Create it with YOUR email so you get a copy of every job.
-       2. Paste the key below.
-       3. List your team's REAL emails, comma-separated (they're CC'd).
+     EMAIL SETUP  —  FormSubmit.co (free, no account, multi-recipient).
+       • RECIPIENTS: comma-separated. EVERYONE listed gets each job
+         (first address is the primary; the rest are CC'd).
+       • ONE-TIME ACTIVATION: the very first submission triggers a
+         "Confirm your email" message from FormSubmit to the FIRST
+         address below. Someone at that inbox must click the link once;
+         after that, every send goes through automatically.
      Leave EMAIL_ON_SAVE = true to email automatically on every Save.
      ============================================================ */
   const CONFIG = {
-    WEB3FORMS_ACCESS_KEY: "6dfa9237-bffc-4cf1-9166-62db710c3d60",
-    TEAM_EMAILS: "temecula.support@fullypromoted.com, temeculaca.cs@signarama.com",
+    RECIPIENTS: "temecula.support@fullypromoted.com, temeculaca.cs@signarama.com",
     EMAIL_ON_SAVE: true,
     FROM_NAME: "Fully Promoted Job Intake"
   };
@@ -1054,45 +1053,46 @@
     };
   }
 
-  /* ---- email (Web3Forms) ---- */
-  function emailConfigured(){
-    const k = CONFIG.WEB3FORMS_ACCESS_KEY || "";
-    return !/PASTE_YOUR/i.test(k) && k.trim().length > 8;
+  /* ---- email (FormSubmit.co — free, multi-recipient) ---- */
+  function recipientList(){
+    return (CONFIG.RECIPIENTS||"").split(",").map(s=>s.trim()).filter(Boolean);
   }
-  function ccList(){
-    return (CONFIG.TEAM_EMAILS||"").split(",").map(s=>s.trim()).filter(Boolean);
+  function emailConfigured(){
+    const r = recipientList();
+    return r.length > 0 && EMAIL_RE.test(r[0]);
   }
   async function emailTeam(job){
-    if(!emailConfigured()) return {ok:false, reason:"Email not set up"};
+    const rcpts = recipientList();
+    if(!emailConfigured()) return {ok:false, reason:"No recipients set"};
     let body = job.ticket || "";
     if(job.form){ body += "\n\nView or edit the full job online:\n" + viewLink(job); }
     const payload = {
-      access_key: CONFIG.WEB3FORMS_ACCESS_KEY.trim(),
-      from_name: CONFIG.FROM_NAME || "Job Intake",
-      subject: (job.rush?"RUSH — ":"") + "New job: " + (job.customer || job.item || "Untitled"),
-      message: body
+      _subject: (job.rush?"RUSH — ":"") + "New job: " + (job.customer || job.item || "Untitled"),
+      message: body,
+      _captcha: "false"
     };
-    const cc = ccList();
-    if(cc.length) payload.cc = cc;
+    const cc = rcpts.slice(1);
+    if(cc.length) payload._cc = cc.join(",");
     try{
-      const res = await fetch("https://api.web3forms.com/submit",{
+      const res = await fetch("https://formsubmit.co/ajax/"+encodeURIComponent(rcpts[0]),{
         method:"POST",
         headers:{"Content-Type":"application/json","Accept":"application/json"},
         body: JSON.stringify(payload)
       });
       const data = await res.json().catch(()=>({}));
-      return {ok: res.ok && data.success!==false, reason: data.message || ("HTTP "+res.status)};
+      const ok = res.ok && (data.success===true || String(data.success)==="true");
+      return {ok, reason: data.message || ("HTTP "+res.status)};
     }catch(e){ return {ok:false, reason:(e && e.message) || "network error"}; }
   }
   function refreshMailStatus(){
-    const on = emailConfigured(), n = ccList().length;
+    const r = recipientList(), on = emailConfigured();
     $("mdot").classList.toggle("on", on);
     if(on){
       $("mailStatus").textContent = (CONFIG.EMAIL_ON_SAVE ? "Auto-email on" : "Email ready")
-        + " — CC to " + n + " teammate" + (n===1?"":"s");
+        + " — sends to " + r.length + " address" + (r.length===1?"":"es");
       $("save").textContent = CONFIG.EMAIL_ON_SAVE ? "Save & email team" : "Save to Job Log";
     } else {
-      $("mailStatus").textContent = "Email not set up — add your key in the file";
+      $("mailStatus").textContent = "Email not set up — add recipients in the file";
       $("save").textContent = "Save to Job Log";
     }
   }
@@ -1114,7 +1114,7 @@
   });
 
   $("emailBtn").addEventListener("click", async()=>{
-    if(!emailConfigured()){ toast("Add your Web3Forms key in the file first — see Email setup"); return; }
+    if(!emailConfigured()){ toast("Add team recipients in the file first — see Email setup"); return; }
     const err = validateCustomer();
     if(err){ toast(err); return; }
     toast("Emailing team…");
@@ -1123,10 +1123,10 @@
   });
 
   $("testEmail").addEventListener("click", async()=>{
-    if(!emailConfigured()){ toast("Add your Web3Forms access key in the file — see Email setup"); return; }
+    if(!emailConfigured()){ toast("Add team recipients in the file — see Email setup"); return; }
     toast("Sending test…");
     const r = await emailTeam({rush:false, customer:"TEST — please ignore",
-      ticket:"This is a test from the Fully Promoted job intake form.\nIf you received this, auto-email is working."});
+      ticket:"This is a test from the Fully Promoted job intake form.\nIf you received this, team email is working."});
     toast(r.ok ? "Test sent ✓ — check inboxes" : ("Test failed: "+r.reason));
   });
 
