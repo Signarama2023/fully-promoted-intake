@@ -1,0 +1,1061 @@
+<!-- Fully Promoted Temecula — New Job Intake -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#252220;
+    --ink-soft:#3B3530;
+    --muted:#7C756D;
+    --canvas:#E6E3DC;
+    --surface:#FFFFFF;
+    --surface-2:#FBFAF6;
+    --line:#E2DDD3;
+    --line-strong:#D0C9BC;
+    --accent:#3D34C9;
+    --accent-ink:#2C25A0;
+    --accent-soft:#ECEAFA;
+    --thread:#0E7C6B;
+    --thread-soft:#E1F0EC;
+    --rush:#D8412F;
+    --rush-soft:#FBE7E3;
+    --kraft:#EADFC6;
+    --kraft-line:#CBBB97;
+    --kraft-ink:#3C3323;
+    --radius:16px;
+    --sans:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --display:'Bricolage Grotesque',var(--sans);
+    --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--canvas);color:var(--ink);
+    font-family:var(--sans);font-size:14.5px;line-height:1.5;letter-spacing:-0.005em;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:26px 22px 72px}
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    background:var(--ink);color:#fff;border-radius:var(--radius);
+    padding:22px 26px;display:flex;align-items:center;justify-content:space-between;
+    gap:18px;flex-wrap:wrap;position:relative;overflow:hidden;
+  }
+  .masthead::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+    background:linear-gradient(90deg,var(--accent) 0 60%,var(--thread) 60% 82%,var(--rush) 82% 100%);
+  }
+  .brand{display:flex;align-items:center;gap:15px}
+  .stamp{
+    width:48px;height:48px;border-radius:13px;background:var(--accent);
+    display:grid;place-items:center;font-family:var(--display);font-weight:800;
+    color:#fff;font-size:19px;letter-spacing:.5px;flex:none;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
+  }
+  .brand h1{font-family:var(--display);font-size:19px;font-weight:700;margin:0;letter-spacing:-0.01em}
+  .brand p{margin:3px 0 0;color:#A9A096;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-family:var(--mono)}
+  .masthead .meta{font-family:var(--mono);font-size:11.5px;color:#A9A096;text-align:right;line-height:1.7}
+  .masthead .meta b{color:#fff;font-weight:500}
+
+  /* ---------- Layout ---------- */
+  .grid{display:grid;grid-template-columns:1fr 404px;gap:22px;margin-top:22px;align-items:start}
+  @media(max-width:920px){ .grid{grid-template-columns:1fr} }
+
+  /* ---------- Form card ---------- */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    box-shadow:0 1px 2px rgba(37,34,32,.04),0 12px 28px -20px rgba(37,34,32,.25)}
+  #form{display:flex;flex-direction:column}
+  section.block{border-bottom:1px solid var(--line)}
+  section.block.customer-block{order:-1}
+  section.block:last-child{border-bottom:0}
+  .sec-head{display:flex;align-items:center;gap:11px;padding:19px 22px 6px}
+  .sec-num{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:600;
+    background:var(--accent-soft);border-radius:7px;padding:3px 8px;letter-spacing:.04em}
+  .sec-head h2{font-family:var(--display);font-size:16px;font-weight:700;margin:0;letter-spacing:-0.01em}
+  .sec-body{padding:8px 22px 22px}
+
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .row.one{grid-template-columns:1fr}
+  .row.three{grid-template-columns:1fr 1fr 1fr}
+  @media(max-width:540px){ .row,.row.three{grid-template-columns:1fr} }
+
+  .field{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:12px;font-weight:600;color:var(--ink-soft);letter-spacing:0}
+  .field .hint{font-size:11px;color:var(--muted);font-weight:400}
+  input[type=text],input[type=number],input[type=date],input[type=email],textarea,select{
+    font-family:var(--sans);font-size:14px;color:var(--ink);
+    border:1px solid var(--line-strong);border-radius:10px;padding:11px 12px;background:var(--surface-2);
+    width:100%;transition:border-color .14s,box-shadow .14s,background .14s;
+  }
+  input::placeholder,textarea::placeholder{color:#AEA79E}
+  textarea{resize:vertical;min-height:60px;line-height:1.5}
+  input:focus,textarea:focus,select:focus{
+    outline:none;border-color:var(--accent);background:#fff;box-shadow:0 0 0 3.5px var(--accent-soft);
+  }
+  select{cursor:pointer;appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' fill='none' stroke='%237C756D' stroke-width='1.5' stroke-linecap='round'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+  .req{color:var(--rush);font-weight:700;margin-left:1px}
+  input.err,textarea.err{border-color:var(--rush)!important;box-shadow:0 0 0 3.5px var(--rush-soft)!important}
+
+  .input-copy{position:relative}
+  .input-copy input{padding-right:64px}
+  .copy-inline{position:absolute;top:50%;right:6px;transform:translateY(-50%);
+    font-family:var(--sans);font-size:11px;font-weight:600;color:var(--accent);
+    background:#fff;border:1px solid var(--line-strong);border-radius:7px;padding:6px 10px;cursor:pointer;transition:all .12s}
+  .copy-inline:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .copy-inline:active{transform:translateY(-50%) scale(.95)}
+
+  /* chips */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip label{display:inline-block;font-size:12.5px;font-weight:500;color:var(--ink-soft);
+    border:1px solid var(--line-strong);border-radius:9px;padding:7px 13px;cursor:pointer;
+    user-select:none;transition:all .12s;background:var(--surface-2)}
+  .chip label:hover{border-color:var(--accent)}
+  .chip input:checked + label{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .chip input:focus-visible + label{box-shadow:0 0 0 3px var(--accent-soft)}
+
+  /* segmented toggles */
+  .seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;background:var(--surface-2)}
+  .seg button{font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--muted);
+    border:0;background:transparent;padding:9px 16px;cursor:pointer;border-right:1px solid var(--line-strong);transition:all .12s}
+  .seg button:last-child{border-right:0}
+  .seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+  .seg.rush button[aria-pressed=true]{background:var(--rush)}
+
+  /* product / vendor cards */
+  .product-card{border:1px solid var(--line);border-radius:12px;padding:14px 14px 16px;margin-top:11px;background:var(--surface-2)}
+  .product-card .pc-head{display:flex;align-items:center;justify-content:space-between}
+  .product-card .pc-num{font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:600;
+    letter-spacing:.12em;background:var(--accent-soft);padding:3px 8px;border-radius:6px}
+  .p-remove{border:0;background:none;color:var(--muted);cursor:pointer;font-family:var(--sans);
+    font-size:11.5px;font-weight:600;line-height:1;padding:5px 8px;border-radius:7px;transition:all .12s}
+  .p-remove:hover{color:var(--rush);background:var(--rush-soft)}
+  .product-card .field:first-of-type{margin-top:10px}
+  .add-product{margin-top:12px;font-family:var(--display);font-size:13px;font-weight:600;color:var(--accent);
+    background:none;border:1.5px dashed var(--line-strong);border-radius:11px;padding:11px 12px;cursor:pointer;width:100%;transition:all .12s}
+  .add-product:hover{border-color:var(--accent);background:var(--accent-soft)}
+
+  /* standard margins card */
+  .standard{background:var(--thread-soft);border:1px solid #C8E1DB;border-left:4px solid var(--thread);
+    border-radius:11px;padding:13px 15px;margin-top:14px}
+  .standard .cap{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--thread);font-weight:600}
+  .std-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px;margin-top:9px}
+  @media(max-width:540px){ .std-grid{grid-template-columns:1fr} }
+  .std-grid div{font-size:12.5px;color:var(--ink);display:flex;justify-content:space-between;gap:8px}
+  .std-grid b{font-family:var(--mono);color:var(--thread);font-weight:600}
+  .std-note{font-size:10.5px;color:#5E8A81;margin-top:9px;line-height:1.5}
+
+  .margin-row{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:end}
+  .mk{font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap;padding-bottom:10px}
+
+  /* shipping toggle */
+  .ship-toggle{display:flex;align-items:center;gap:10px;margin-top:2px}
+  .ship-toggle input{width:17px;height:17px;accent-color:var(--accent)}
+  .ship-toggle label{font-size:13px;font-weight:500;color:var(--ink);cursor:pointer}
+  #shipFields[hidden]{display:none}
+
+  /* ---------- Panel ---------- */
+  .panel{position:sticky;top:22px;display:flex;flex-direction:column;gap:15px}
+  @media(max-width:920px){ .panel{position:static} }
+
+  /* ticket = manila work-order traveler */
+  .ticket{border-radius:var(--radius);overflow:hidden;border:1px solid var(--kraft-line);
+    background:var(--kraft);
+    background-image:repeating-linear-gradient(0deg,rgba(60,50,35,.05) 0 1px,transparent 1px 26px);
+    box-shadow:0 14px 34px -18px rgba(60,50,35,.55)}
+  .ticket-top{display:flex;align-items:center;justify-content:space-between;padding:13px 17px;
+    border-bottom:1.5px dashed var(--kraft-line);background:rgba(255,255,255,.28)}
+  .ticket-top span{font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:#7A6A4C;font-weight:600}
+  .rush-flag{background:var(--rush);color:#fff;font-family:var(--mono);font-weight:600;font-size:10.5px;
+    letter-spacing:.16em;padding:3px 9px;border-radius:5px;display:none}
+  .rush-flag.on{display:inline-block}
+  pre.ticket-body{font-family:var(--mono);font-size:11.5px;line-height:1.68;color:var(--kraft-ink);
+    margin:0;padding:17px;white-space:pre-wrap;word-break:break-word;max-height:56vh;overflow:auto}
+  pre.ticket-body .k{color:var(--accent-ink)}
+
+  /* actions */
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn{font-family:var(--display);font-size:13.5px;font-weight:600;letter-spacing:-0.005em;
+    border:1px solid var(--line-strong);border-radius:11px;padding:12px 12px;cursor:pointer;
+    background:var(--surface);color:var(--ink);transition:all .12s}
+  .btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;grid-column:1/-1;
+    box-shadow:0 8px 18px -10px var(--accent)}
+  .btn.primary:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:#fff}
+  .btn.ghost{color:var(--muted);grid-column:1/-1}
+  .btn.ghost:hover{color:var(--rush);border-color:var(--rush);background:var(--rush-soft)}
+  .btn:active{transform:translateY(1px)}
+
+  /* email status bar */
+  .mailbar{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted);
+    background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:11px 13px}
+  .mdot{width:8px;height:8px;border-radius:50%;background:var(--rush);flex:none;box-shadow:0 0 0 3px var(--rush-soft)}
+  .mdot.on{background:var(--thread);box-shadow:0 0 0 3px var(--thread-soft)}
+  .mailbar .mlink{margin-left:auto;font-size:11.5px;font-weight:600;color:var(--accent);
+    background:none;border:0;cursor:pointer;padding:2px 4px;font-family:var(--sans)}
+  .mailbar .mlink:hover{text-decoration:underline}
+
+  /* job log */
+  .log{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .log-head{display:flex;align-items:center;justify-content:space-between;padding:14px 17px;border-bottom:1px solid var(--line)}
+  .log-head h3{font-family:var(--display);font-size:14.5px;font-weight:700;margin:0}
+  .log-head .share{font-size:10.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--thread)}
+  .dot.local{background:var(--rush)}
+  .log-list{max-height:300px;overflow:auto}
+  .log-empty{padding:26px 17px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.6}
+  .log-item{padding:13px 17px;border-bottom:1px solid var(--line);display:flex;gap:11px;align-items:flex-start}
+  .log-item:last-child{border-bottom:0}
+  .log-item:hover{background:var(--surface-2)}
+  .log-item .li-main{flex:1;min-width:0}
+  .log-item .li-title{font-weight:600;font-size:13.5px;display:flex;align-items:center;gap:8px}
+  .li-badge{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.1em;background:var(--rush);color:#fff;padding:2px 6px;border-radius:4px}
+  .log-item .li-sub{font-size:11.5px;color:var(--muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .log-item .li-time{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px}
+  .li-actions{display:flex;flex-direction:column;gap:6px;flex:none}
+  .mini{font-size:10.5px;font-family:var(--sans);font-weight:600;border:1px solid var(--line-strong);background:#fff;
+    border-radius:7px;padding:6px 10px;cursor:pointer;color:var(--muted);transition:all .12s}
+  .mini:hover{border-color:var(--accent);color:var(--accent)}
+  .mini.del:hover{border-color:var(--rush);color:var(--rush);background:var(--rush-soft)}
+
+  /* setup */
+  .setup{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:0 16px}
+  .setup summary{cursor:pointer;font-family:var(--display);font-size:13px;font-weight:600;color:var(--ink);
+    padding:14px 0;list-style:none;display:flex;align-items:center;gap:9px}
+  .setup summary::-webkit-details-marker{display:none}
+  .setup summary::before{content:"⚙";color:var(--accent)}
+  .setup .setup-body{font-size:12.5px;color:var(--muted);line-height:1.65;padding:2px 0 16px;border-top:1px solid var(--line)}
+  .setup code{font-family:var(--mono);font-size:11px;background:var(--kraft);padding:1px 6px;border-radius:5px;color:var(--kraft-ink);word-break:break-word}
+  .setup ol{margin:9px 0;padding-left:19px}
+  .setup li{margin:6px 0}
+  .setup a{color:var(--accent)}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;font-size:13px;font-weight:500;font-family:var(--sans);
+    padding:12px 20px;border-radius:11px;opacity:0;pointer-events:none;transition:all .22s;z-index:50;
+    box-shadow:0 12px 34px rgba(37,34,32,.35)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .draft-note{font-size:11px;color:#A9A096;margin-top:3px}
+
+  @media print{
+    body{background:#fff}
+    .wrap>*:not(.print-only){display:none!important}
+    .print-only{display:block!important}
+  }
+  .print-only{display:none}
+  #printArea{font-family:var(--mono);font-size:12px;white-space:pre-wrap;color:#000;padding:0}
+
+  @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+
+  /* ---------- Mobile / touch ---------- */
+  @media(max-width:600px){
+    .wrap{padding:15px 13px 56px}
+    .masthead{padding:18px 18px;gap:13px;flex-direction:column;align-items:flex-start}
+    .masthead .meta{text-align:left}
+    .brand{gap:13px}
+    .brand h1{font-size:16.5px;line-height:1.25}
+    .stamp{width:42px;height:42px;font-size:17px;border-radius:11px}
+    .grid{gap:15px;margin-top:15px}
+    .card,.log,.setup,.ticket{border-radius:14px}
+    .sec-head{padding:16px 16px 4px}
+    .sec-body{padding:6px 16px 18px}
+    .sec-head h2{font-size:15px}
+    /* 16px inputs stop iOS from zooming in on focus */
+    input[type=text],input[type=number],input[type=date],input[type=email],textarea,select{font-size:16px;padding:12px 13px}
+    .input-copy input{padding-right:72px}
+    .copy-inline{font-size:12px;padding:7px 11px}
+    /* bigger tap targets */
+    .seg{width:100%}
+    .seg button{flex:1;padding:12px 8px;font-size:13px}
+    .chip label{padding:9px 14px;font-size:13px}
+    .btn{padding:14px 12px;font-size:14px}
+    .mini{padding:9px 12px;font-size:12px}
+    .li-actions{flex-direction:row;flex-wrap:wrap}
+    .ship-toggle input{width:20px;height:20px}
+    .add-product{padding:13px 12px}
+    .product-card{padding:13px 13px 15px}
+    /* let long lists flow with the page instead of nested scrolling */
+    .log-list{max-height:none}
+    pre.ticket-body{font-size:11px;max-height:46vh}
+    .ticket-top{padding:12px 14px}
+    .panel{gap:12px}
+    .toast{left:13px;right:13px;transform:translateY(20px);text-align:center}
+    .toast.show{transform:translateY(0)}
+  }
+  @media(max-width:380px){
+    .brand h1{font-size:15px}
+    .sec-head h2{font-size:14.5px}
+    pre.ticket-body{font-size:10.5px}
+    .chip label{padding:8px 12px}
+    .seg button{padding:11px 5px;font-size:12.5px}
+  }
+
+</style>
+
+<div class="wrap">
+  <div class="masthead">
+    <div class="brand">
+      <div class="stamp">FP</div>
+      <div>
+        <h1>Fully Promoted Temecula — New Job Intake</h1>
+        <p>Quote / Order Build Sheet</p>
+      </div>
+    </div>
+    <div class="meta">
+      <div>Prepared by <b>Mark Bailey</b></div>
+      <div id="clock">—</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- ============ FORM ============ -->
+    <div class="card" id="form">
+
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">02</span><h2>Timeline & Handling</h2></div>
+        <div class="sec-body">
+          <div class="row">
+            <div class="field"><label>Quote due date</label><input type="date" id="quoteDue"></div>
+            <div class="field"><label>In-hand date</label><input type="date" id="inHand"></div>
+          </div>
+          <div class="row three" style="margin-top:14px">
+            <div class="field">
+              <label>In-hand date firm?</label>
+              <div class="seg" data-toggle="firm">
+                <button type="button" data-val="YES" aria-pressed="false">Firm</button>
+                <button type="button" data-val="NO" aria-pressed="true">Flexible</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Rush order?</label>
+              <div class="seg rush" data-toggle="rush">
+                <button type="button" data-val="YES" aria-pressed="false">Rush</button>
+                <button type="button" data-val="NO" aria-pressed="true">No</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Mock-up required?</label>
+              <div class="seg" data-toggle="mockup">
+                <button type="button" data-val="YES" aria-pressed="true">Yes</button>
+                <button type="button" data-val="NO" aria-pressed="false">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">03</span><h2>Items &amp; Vendors</h2></div>
+        <div class="sec-body">
+          <div class="field">
+            <label>Item category <span class="hint">— check all that apply</span></label>
+            <div class="chips" id="cats">
+              <span class="chip"><input type="checkbox" id="c-apparel" value="Apparel"><label for="c-apparel">Apparel</label></span>
+              <span class="chip"><input type="checkbox" id="c-headwear" value="Headwear"><label for="c-headwear">Headwear</label></span>
+              <span class="chip"><input type="checkbox" id="c-outerwear" value="Outerwear"><label for="c-outerwear">Outerwear</label></span>
+              <span class="chip"><input type="checkbox" id="c-drinkware" value="Drinkware"><label for="c-drinkware">Drinkware</label></span>
+              <span class="chip"><input type="checkbox" id="c-tech" value="Tech"><label for="c-tech">Tech</label></span>
+              <span class="chip"><input type="checkbox" id="c-bags" value="Bags"><label for="c-bags">Bags</label></span>
+              <span class="chip"><input type="checkbox" id="c-writing" value="Writing"><label for="c-writing">Writing</label></span>
+              <span class="chip"><input type="checkbox" id="c-tradeshow" value="Trade Show"><label for="c-tradeshow">Trade Show</label></span>
+              <span class="chip"><input type="checkbox" id="c-awards" value="Awards"><label for="c-awards">Awards</label></span>
+              <span class="chip"><input type="checkbox" id="c-other" value="Other"><label for="c-other">Other</label></span>
+            </div>
+          </div>
+          <div class="field"><label>Category preference / notes <span class="hint">— steer the team toward a look or product family</span></label><input type="text" id="catPref" placeholder="e.g. prefer stainless drinkware over plastic"></div>
+          <div class="field" style="margin-bottom:-4px"><label>Products &amp; assigned vendors <span class="hint">— one line per product; set the vendor for each</span></label></div>
+          <div id="products"></div>
+          <button type="button" class="add-product" id="addProduct">+ Add another product</button>
+          <datalist id="vendorList">
+            <option>SanMar</option><option>S&amp;S Activewear</option><option>alphabroder</option>
+            <option>TSC Apparel</option><option>Cutter &amp; Buck</option><option>Richardson</option>
+            <option>HIT Promotional</option><option>Gemline</option><option>PCNA</option>
+            <option>Logomark</option><option>SnugZ</option><option>Bag Makers</option>
+            <option>Gemini</option><option>B2Sign</option>
+          </datalist>
+          <div class="field"><label>Overall size run / breakdown notes <span class="hint">— sizes / colors / SKUs</span></label><textarea id="qtyBreak" placeholder="e.g. S:12  M:40  L:50  XL:30  2XL:12  3XL:6"></textarea></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">04</span><h2>Decoration & Imprint</h2></div>
+        <div class="sec-body">
+          <div class="row">
+            <div class="field"><label>Imprint location</label><input type="text" id="impLoc" placeholder="e.g. Left chest + full back"></div>
+            <div class="field"><label>Imprint method <span class="hint">preferred</span></label>
+              <select id="impMethod">
+                <option value="">— select —</option>
+                <option>Screen print</option>
+                <option>Embroidery</option>
+                <option>DTF / Transfer</option>
+                <option>DTG</option>
+                <option>Heat transfer / Vinyl</option>
+                <option>Laser engrave</option>
+                <option>Pad print</option>
+                <option>Debossing</option>
+                <option>Sublimation</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field"><label>Logo details</label><input type="text" id="logo" placeholder="e.g. vector on file / PMS 289C + 123C"></div>
+            <div class="field"><label># of imprint colors</label><input type="text" id="impColors" placeholder="e.g. 2"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">05</span><h2>Pricing & Margins</h2></div>
+        <div class="sec-body">
+          <div class="standard">
+            <div class="cap">Standard margins — applied to every job</div>
+            <div class="std-grid">
+              <div>Apparel <b>50%</b></div>
+              <div>Decoration <b>40%</b></div>
+              <div>Promotional goods <b>40%</b></div>
+              <div>Design <b>30%</b></div>
+            </div>
+            <div class="std-note">Markup equivalents: 50% margin = 100% markup · 40% = 66.7% · 30% = 42.9%.</div>
+          </div>
+
+          <div class="row" style="margin-top:14px">
+            <div class="field"><label>Budget <span class="hint">estimate OK</span></label><input type="text" id="budget" placeholder="e.g. ~$3,500"></div>
+            <div class="field"><label>Product type <span class="hint">— sets product margin</span></label>
+              <select id="prodType">
+                <option value="Apparel" data-m="50">Apparel — 50%</option>
+                <option value="Promotional goods" data-m="40">Promotional goods — 40%</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:6px">
+            <div class="field"><label>Product margin (%)</label>
+              <div class="margin-row"><input type="number" id="mProd" value="50" min="0" max="99"><span class="mk" id="mkProd">≈100% mkup</span></div>
+            </div>
+            <div class="field"><label>Decoration margin (%)</label>
+              <div class="margin-row"><input type="number" id="mDeco" value="40" min="0" max="99"><span class="mk" id="mkDeco">≈66.7% mkup</span></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field"><label>Design margin (%)</label>
+              <div class="margin-row"><input type="number" id="mDesign" value="30" min="0" max="99"><span class="mk" id="mkDesign">≈42.9% mkup</span></div>
+            </div>
+            <div class="field"><label>Margin on additional charges (%)</label>
+              <div class="margin-row"><input type="number" id="mAddl" value="40" min="0" max="99"><span class="mk" id="mkAddl">≈66.7% mkup</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">06</span><h2>Shipping</h2></div>
+        <div class="sec-body">
+          <div class="ship-toggle">
+            <input type="checkbox" id="shipOn">
+            <label for="shipOn">Shipping details required</label>
+          </div>
+          <div id="shipFields" hidden>
+            <div class="row">
+              <div class="field"><label>Ship-to zip code</label><input type="text" id="shipZip" placeholder="e.g. 92590"></div>
+              <div class="field"><label>Markup on shipping (%)</label><input type="number" id="shipMk" placeholder="e.g. 15"></div>
+            </div>
+            <div class="field"><label>Additional shipping notes</label><textarea id="shipNotes" placeholder="e.g. split ship to 2 locations, blind ship, liftgate needed"></textarea></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block customer-block">
+        <div class="sec-head"><span class="sec-num">01</span><h2>Customer & Job</h2></div>
+        <div class="sec-body">
+          <div class="row">
+            <div class="field"><label>Job name / event</label><input type="text" id="jobName" placeholder="e.g. Fall golf tournament polos"></div>
+            <div class="field"><label>Assigned to</label><input type="text" id="assignedTo" placeholder="e.g. Chris"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label>Name <span class="req">*</span></label><input type="text" id="custName" placeholder="Company / contact name"></div>
+            <div class="field"><label>Email <span class="hint">optional</span></label>
+              <div class="input-copy">
+                <input type="email" id="custEmail" placeholder="name@company.com">
+                <button type="button" class="copy-inline" id="copyEmail" title="Copy email">Copy</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field"><label>Phone</label><input type="text" id="custPhone" placeholder="(951) 000-0000"></div>
+            <div class="field"><label>Address</label><input type="text" id="custAddr" placeholder="Street, city, state, zip"></div>
+          </div>
+          <div class="field"><label>Customer request / internal notes</label><textarea id="jobNotes" placeholder="What did the customer ask for? Include any promises, preferences, or details the quoting team should know."></textarea></div>
+          <div class="draft-note" id="draftStatus">Changes save automatically on this device.</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ PANEL ============ -->
+    <div class="panel">
+      <div class="ticket">
+        <div class="ticket-top">
+          <span>Job Ticket — live preview</span>
+          <span class="rush-flag" id="rushFlag">⚡ RUSH</span>
+        </div>
+        <pre class="ticket-body" id="ticket"></pre>
+      </div>
+      <div class="mailbar">
+        <span class="mdot" id="mdot"></span>
+        <span id="mailStatus">Email not set up</span>
+        <button class="mlink" id="testEmail" type="button">Send test</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="save">Save to Job Log</button>
+        <button class="btn" id="copy">Copy ticket</button>
+        <button class="btn" id="emailBtn">Email team</button>
+        <button class="btn" id="print">Print</button>
+        <button class="btn ghost" id="clear">Start a new job</button>
+      </div>
+
+      <div class="log">
+        <div class="log-head">
+          <h3>Job Log</h3>
+          <span class="share" id="shareState"><span class="dot"></span> shared with your team</span>
+        </div>
+        <div class="log-list" id="logList">
+          <div class="log-empty">No jobs saved yet. Fill the sheet and hit <b>Save to Job Log</b>.</div>
+        </div>
+      </div>
+
+      <details class="setup">
+        <summary>Email setup — one-time, ~2 minutes</summary>
+        <div class="setup-body">
+          To turn on auto-email from a GitHub-hosted copy, edit the <code>CONFIG</code> block near the top of this file's script, then commit:
+          <ol>
+            <li>Go to <a href="https://web3forms.com" target="_blank" rel="noopener">web3forms.com</a> and create a free access key using <b>your own email</b> (you'll get a copy of every job).</li>
+            <li>Paste the key into <code>WEB3FORMS_ACCESS_KEY</code>.</li>
+            <li>Put your team's real addresses in <code>TEAM_EMAILS</code>, comma-separated — they're CC'd on every send.</li>
+            <li>Commit &amp; push. Hit <b>Send test</b> above to confirm it lands.</li>
+          </ol>
+          The page is public, so the key is visible in the source — that's normal for Web3Forms. If it ever gets abused, regenerate the key or put the page behind a login (e.g. Cloudflare Access).
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="print-only"><pre id="printArea"></pre></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     EMAIL SETUP  —  edit these lines, then commit to GitHub.
+       1. Free access key (30 sec):  https://web3forms.com
+          Create it with YOUR email so you get a copy of every job.
+       2. Paste the key below.
+       3. List your team's REAL emails, comma-separated (they're CC'd).
+     Leave EMAIL_ON_SAVE = true to email automatically on every Save.
+     ============================================================ */
+  const CONFIG = {
+    WEB3FORMS_ACCESS_KEY: "PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE",
+    TEAM_EMAILS: "emma@your-domain.com, alan@your-domain.com, grant@your-domain.com",
+    EMAIL_ON_SAVE: true,
+    FROM_NAME: "Fully Promoted Job Intake"
+  };
+
+  const $ = id => document.getElementById(id);
+  const toggles = {firm:"NO", rush:"NO", mockup:"YES"};
+
+  /* ---- clock ---- */
+  function stamp(d){
+    const p = n => String(n).padStart(2,"0");
+    return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+  }
+  $("clock").textContent = stamp(new Date());
+
+  /* ---- segmented toggles ---- */
+  document.querySelectorAll(".seg[data-toggle]").forEach(seg=>{
+    const key = seg.dataset.toggle;
+    seg.querySelectorAll("button").forEach(b=>{
+      b.addEventListener("click",()=>{
+        toggles[key] = b.dataset.val;
+        seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", x===b));
+        render();
+      });
+    });
+  });
+
+  /* ---- product type drives product margin ---- */
+  $("prodType").addEventListener("change", e=>{
+    const m = e.target.selectedOptions[0].dataset.m;
+    $("mProd").value = m;
+    render();
+  });
+
+  /* ---- shipping toggle ---- */
+  $("shipOn").addEventListener("change", e=>{
+    $("shipFields").hidden = !e.target.checked;
+    render();
+  });
+
+  /* ---- margin -> markup helper ---- */
+  function mkup(m){
+    m = parseFloat(m);
+    if(isNaN(m) || m>=100 || m<0) return "—";
+    return (m/(100-m)*100).toFixed(1).replace(/\.0$/,"") + "% mkup";
+  }
+  const mkMap = {mProd:"mkProd", mDeco:"mkDeco", mDesign:"mkDesign", mAddl:"mkAddl"};
+  Object.keys(mkMap).forEach(id=>{
+    $(id).addEventListener("input",()=>{ $(mkMap[id]).textContent = "≈"+mkup($(id).value); });
+  });
+
+  function cats(){
+    return [...document.querySelectorAll("#cats input:checked")].map(c=>c.value).join(", ");
+  }
+  const v = id => ($(id).value || "").trim();
+
+  /* ---- required-field validation ---- */
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function clearErr(){ document.querySelectorAll("#form .err").forEach(e=>e.classList.remove("err")); }
+  function validateCustomer(){
+    clearErr();
+    const name=$("custName"), email=$("custEmail");
+    if(!name.value.trim()){ name.classList.add("err"); name.focus(); return "Customer or company name is required"; }
+    const ev=email.value.trim();
+    if(ev && !EMAIL_RE.test(ev)){ email.classList.add("err"); email.focus(); return "Enter a valid customer email or leave it blank"; }
+    return null;
+  }
+  document.getElementById("form").addEventListener("input", e=>{
+    if(e.target && e.target.classList) e.target.classList.remove("err");
+  });
+
+  /* ---- products & vendors (repeatable) ---- */
+  function getProducts(){
+    return [...document.querySelectorAll("#products .product-card")].map(c=>{
+      const val = sel => { const el=c.querySelector(sel); return el ? el.value.trim() : ""; };
+      return { name:val(".p-name"), vendor:val(".p-vendor"), color:val(".p-color"), size:val(".p-size"), qty:val(".p-qty") };
+    }).filter(p => p.name||p.vendor||p.color||p.size||p.qty);
+  }
+  function renumberProducts(){
+    document.querySelectorAll("#products .product-card").forEach((c,i)=>{
+      c.querySelector(".pc-num").textContent = "PRODUCT "+(i+1);
+    });
+  }
+  function makeProductCard(){
+    const card=document.createElement("div");
+    card.className="product-card";
+    card.innerHTML =
+      '<div class="pc-head"><span class="pc-num">PRODUCT</span>'+
+        '<button type="button" class="p-remove" title="Remove this product">✕ remove</button></div>'+
+      '<div class="field"><label>Product name / number</label>'+
+        '<input type="text" class="p-name" placeholder="e.g. Port Authority K500 polo / #K500"></div>'+
+      '<div class="field"><label>Assigned vendor</label>'+
+        '<input type="text" class="p-vendor" list="vendorList" placeholder="start typing — e.g. SanMar, Gemini"></div>'+
+      '<div class="row three">'+
+        '<div class="field"><label>Color</label><input type="text" class="p-color" placeholder="Navy"></div>'+
+        '<div class="field"><label>Size</label><input type="text" class="p-size" placeholder="S–3XL"></div>'+
+        '<div class="field"><label>Qty</label><input type="text" class="p-qty" placeholder="150"></div>'+
+      '</div>';
+    card.querySelector(".p-remove").addEventListener("click",()=>{
+      const cards=document.querySelectorAll("#products .product-card");
+      if(cards.length>1) card.remove();
+      else card.querySelectorAll("input").forEach(i=>i.value="");
+      renumberProducts(); render();
+    });
+    return card;
+  }
+  function initProducts(){
+    const cont=$("products");
+    cont.appendChild(makeProductCard());
+    renumberProducts();
+    $("addProduct").addEventListener("click",()=>{
+      cont.appendChild(makeProductCard());
+      renumberProducts(); render();
+      cont.lastElementChild.querySelector(".p-name").focus();
+    });
+  }
+
+  /* ---- build the ticket text ---- */
+  function buildTicket(){
+    const L=[], line="-".repeat(40), dbl="=".repeat(40);
+    const pad = (label,val)=> "  " + (label+":").padEnd(15) + (val||"—");
+    L.push(dbl);
+    L.push("   FULLY PROMOTED TEMECULA");
+    L.push("   NEW JOB INTAKE / QUOTE");
+    L.push(dbl);
+    if(toggles.rush==="YES") L.push("  ⚡ RUSH JOB");
+    L.push("  Created: " + stamp(new Date()));
+    L.push(line);
+    L.push("CUSTOMER");
+    if(v("jobName")) L.push(pad("Job", v("jobName")));
+    if(v("assignedTo")) L.push(pad("Assigned to", v("assignedTo")));
+    L.push(pad("Name", v("custName")));
+    L.push(pad("Email", v("custEmail")));
+    if(v("custPhone")) L.push(pad("Phone", v("custPhone")));
+    if(v("custAddr")) L.push(pad("Address", v("custAddr")));
+    if(v("jobNotes")) L.push(pad("Notes", v("jobNotes").replace(/\n/g," | ")));
+    L.push(line);
+    L.push("TIMELINE & HANDLING");
+    L.push(pad("Quote due", v("quoteDue")));
+    L.push(pad("In-hand", (v("inHand")||"—") + "  [" + (toggles.firm==="YES"?"FIRM":"flexible") + "]"));
+    L.push(pad("Rush", toggles.rush));
+    L.push(pad("Mock-up", toggles.mockup==="YES"?"Required":"Not required"));
+    L.push(line);
+    L.push("ITEMS & VENDORS");
+    L.push(pad("Category", cats()));
+    if(v("catPref")) L.push(pad("Preference", v("catPref")));
+    const prods = getProducts();
+    if(prods.length){
+      prods.forEach((p,i)=>{
+        L.push("  "+(i+1)+") "+(p.name || "(unnamed product)"));
+        L.push("       Vendor:  " + (p.vendor || "— unassigned —"));
+        const specs=[];
+        if(p.color||p.size) specs.push([p.color,p.size].filter(Boolean).join(" / "));
+        if(p.qty) specs.push("Qty "+p.qty);
+        if(specs.length) L.push("       " + specs.join("   ·   "));
+      });
+    } else {
+      L.push(pad("Products", ""));
+    }
+    if(v("qtyBreak")) L.push(pad("Size run", v("qtyBreak").replace(/\n/g," | ")));
+    L.push(line);
+    L.push("DECORATION & IMPRINT");
+    L.push(pad("Location", v("impLoc")));
+    L.push(pad("Method", v("impMethod")));
+    L.push(pad("Logo", v("logo")));
+    L.push(pad("Imprint clrs", v("impColors")));
+    L.push(line);
+    L.push("PRICING & MARGINS");
+    L.push(pad("Budget", v("budget")));
+    L.push(pad("Product type", v("prodType")));
+    L.push(pad("Product mgn", v("mProd")+"%"));
+    L.push(pad("Decoration mgn", v("mDeco")+"%"));
+    L.push(pad("Design mgn", v("mDesign")+"%"));
+    L.push(pad("Add'l chg mgn", v("mAddl")+"%"));
+    if($("shipOn").checked){
+      L.push(line);
+      L.push("SHIPPING");
+      L.push(pad("Ship-to zip", v("shipZip")));
+      L.push(pad("Ship markup", v("shipMk")?v("shipMk")+"%":""));
+      if(v("shipNotes")) L.push(pad("Notes", v("shipNotes").replace(/\n/g,", ")));
+    }
+    L.push(dbl);
+    return L.join("\n");
+  }
+
+  function render(){
+    const t = buildTicket();
+    $("ticket").textContent = t;
+    $("rushFlag").classList.toggle("on", toggles.rush==="YES");
+    return t;
+  }
+  // any input change re-renders and keeps a recoverable draft
+  let draftTimer;
+  function formChanged(){
+    render();
+    clearTimeout(draftTimer);
+    draftTimer=setTimeout(saveDraft,250);
+  }
+  document.getElementById("form").addEventListener("input", formChanged);
+  document.getElementById("form").addEventListener("change", formChanged);
+
+  /* ---- toast ---- */
+  let toastT;
+  function toast(msg){
+    const el=$("toast"); el.textContent=msg; el.classList.add("show");
+    clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove("show"),2200);
+  }
+
+  /* ---- copy ---- */
+  $("copy").addEventListener("click", async()=>{
+    const t = render();
+    try{ await navigator.clipboard.writeText(t); toast("Job ticket copied"); }
+    catch(e){
+      const ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta);
+      ta.select(); try{document.execCommand("copy"); toast("Job ticket copied");}catch(_){toast("Copy failed — select the ticket manually");}
+      document.body.removeChild(ta);
+    }
+  });
+
+  async function copyText(text, okMsg, failMsg){
+    try{ await navigator.clipboard.writeText(text); toast(okMsg); return true; }
+    catch(e){
+      const ta=document.createElement("textarea"); ta.value=text; document.body.appendChild(ta); ta.select();
+      let ok=false; try{ ok=document.execCommand("copy"); }catch(_){}
+      document.body.removeChild(ta);
+      toast(ok?okMsg:(failMsg||"Copy failed")); return ok;
+    }
+  }
+
+  $("copyEmail").addEventListener("click", ()=>{
+    const val=v("custEmail");
+    if(!val){ toast("No email to copy yet"); return; }
+    copyText(val, "Email copied");
+  });
+
+  /* ---- print ---- */
+  $("print").addEventListener("click", ()=>{
+    $("printArea").textContent = render();
+    window.print();
+  });
+
+  /* ---- clear ---- */
+  $("clear").addEventListener("click", ()=>{
+    if(!confirm("Clear the sheet and start a new job? (Saved jobs in the log are kept.)")) return;
+    document.querySelectorAll("#form input, #form textarea").forEach(el=>{
+      if(el.type==="checkbox") el.checked=false; else el.value="";
+    });
+    $("mProd").value=50; $("mDeco").value=40; $("mDesign").value=30; $("mAddl").value=40;
+    $("prodType").value="Apparel"; $("impMethod").value="";
+    const pc=$("products"); pc.innerHTML=""; pc.appendChild(makeProductCard()); renumberProducts();
+    clearErr();
+    $("shipOn").checked=false; $("shipFields").hidden=true;
+    toggles.firm="NO"; toggles.rush="NO"; toggles.mockup="YES";
+    document.querySelectorAll(".seg[data-toggle]").forEach(seg=>{
+      const key=seg.dataset.toggle;
+      seg.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.val===toggles[key]));
+    });
+    Object.keys(mkMap).forEach(id=>$(mkMap[id]).textContent="≈"+mkup($(id).value));
+    render();
+    localStorage.removeItem(DRAFT_KEY);
+    $("draftStatus").textContent="New blank job. Changes save automatically on this device.";
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+
+  /* ==================== JOB LOG (persistent browser storage) ==================== */
+  let SHARED = false;
+  let memory = [];
+  const LOG_KEY = "fp-job-intake-log-v2";
+  const DRAFT_KEY = "fp-job-intake-draft-v2";
+  const KEY = j => "job:"+j.id;
+
+  async function storeAvailable(){
+    try{ await window.storage.list("job:", SHARED); return true; }
+    catch(e){ return false; }
+  }
+
+  async function saveJob(job){
+    if(window.storage){
+      try{ await window.storage.set(KEY(job), JSON.stringify(job), SHARED); return; }
+      catch(e){ /* fall through */ }
+    }
+    memory = memory.filter(j=>j.id!==job.id);
+    memory.push(job);
+    try{ localStorage.setItem(LOG_KEY,JSON.stringify(memory)); }catch(_){ }
+    SHARED=false; markLocal();
+  }
+
+  async function loadJobs(){
+    if(window.storage){
+      try{
+        const res = await window.storage.list("job:", SHARED);
+        const keys = (res && res.keys) ? res.keys : [];
+        const out=[];
+        for(const k of keys){
+          try{ const r=await window.storage.get(k, SHARED); if(r&&r.value) out.push(JSON.parse(r.value)); }catch(_){}
+        }
+        return out.sort((a,b)=>b.ts-a.ts);
+      }catch(e){ SHARED=false; markLocal(); }
+    }
+    if(!memory.length){
+      try{ memory=JSON.parse(localStorage.getItem(LOG_KEY)||"[]"); }catch(_){ memory=[]; }
+    }
+    return memory.slice().sort((a,b)=>b.ts-a.ts);
+  }
+
+  async function removeJob(id){
+    if(window.storage && SHARED!==false){
+      try{ await window.storage.delete("job:"+id, SHARED); return; }catch(_){}
+    }
+    memory = memory.filter(j=>j.id!==id);
+    try{ localStorage.setItem(LOG_KEY,JSON.stringify(memory)); }catch(_){ }
+  }
+
+  function markLocal(){
+    const s=$("shareState");
+    s.innerHTML='<span class="dot local"></span> saved on this device';
+    s.title="Jobs persist in this browser. Email or copy the ticket to share it with the team.";
+  }
+
+  function captureForm(){
+    const fields={};
+    document.querySelectorAll("#form input, #form textarea, #form select").forEach(el=>{
+      if(!el.id || el.closest(".product-card") || el.closest("#cats")) return;
+      fields[el.id]=el.type==="checkbox"?el.checked:el.value;
+    });
+    return {fields,toggles:{...toggles},categories:[...document.querySelectorAll("#cats input:checked")].map(x=>x.id),products:getProducts()};
+  }
+  function applyForm(data){
+    if(!data) return;
+    Object.entries(data.fields||{}).forEach(([id,val])=>{ const el=$(id); if(el) el.type==="checkbox"?el.checked=!!val:el.value=val; });
+    document.querySelectorAll("#cats input").forEach(x=>x.checked=(data.categories||[]).includes(x.id));
+    Object.assign(toggles,data.toggles||{});
+    document.querySelectorAll(".seg[data-toggle]").forEach(seg=>seg.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.val===toggles[seg.dataset.toggle])));
+    const cont=$("products"); cont.innerHTML="";
+    (data.products&&data.products.length?data.products:[{}]).forEach(p=>{
+      const c=makeProductCard(); cont.appendChild(c);
+      [[".p-name",p.name],[".p-vendor",p.vendor],[".p-color",p.color],[".p-size",p.size],[".p-qty",p.qty]].forEach(([s,val])=>c.querySelector(s).value=val||"");
+    });
+    renumberProducts(); $("shipFields").hidden=!$("shipOn").checked; render();
+  }
+  function saveDraft(){
+    try{ localStorage.setItem(DRAFT_KEY,JSON.stringify(captureForm())); $("draftStatus").textContent="Draft saved automatically at "+new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})+"."; }catch(_){ }
+  }
+  function restoreDraft(){
+    try{ const d=JSON.parse(localStorage.getItem(DRAFT_KEY)||"null"); if(d){ applyForm(d); $("draftStatus").textContent="Recovered your last draft. Changes save automatically."; return true; } }catch(_){ }
+    return false;
+  }
+  function loadJobIntoForm(job){
+    if(!job.form){ toast("This older job can only be copied"); return; }
+    if(!confirm("Open this saved job? Your current draft will be replaced.")) return;
+    applyForm(job.form); saveDraft(); window.scrollTo({top:0,behavior:"smooth"}); toast("Saved job opened");
+  }
+
+  function esc(s){ return (s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+
+  async function renderLog(){
+    const jobs = await loadJobs();
+    const list = $("logList");
+    if(!jobs.length){
+      list.innerHTML='<div class="log-empty">No jobs saved yet. Fill the sheet and hit <b>Save to Job Log</b>.</div>';
+      return;
+    }
+    list.innerHTML="";
+    jobs.forEach(j=>{
+      const row=document.createElement("div"); row.className="log-item";
+      const title = j.customer || j.item || "Untitled job";
+      const sub = [j.item, j.qty && (j.qty+" pc"), j.due && ("due "+j.due)].filter(Boolean).join(" · ");
+      row.innerHTML =
+        '<div class="li-main">'+
+          '<div class="li-title">'+esc(title)+(j.rush?'<span class="li-badge">RUSH</span>':'')+'</div>'+
+          '<div class="li-sub">'+esc(sub||"—")+'</div>'+
+          '<div class="li-time">'+esc(j.created)+'</div>'+
+        '</div>'+
+        '<div class="li-actions">'+
+          '<button class="mini" data-load="'+j.id+'">Open</button>'+
+          '<button class="mini" data-copy="'+j.id+'">Copy</button>'+
+          '<button class="mini del" data-del="'+j.id+'">Remove</button>'+
+        '</div>';
+      row.querySelector("[data-load]").addEventListener("click", ()=>loadJobIntoForm(j));
+      row.querySelector("[data-copy]").addEventListener("click", async()=>{
+        try{ await navigator.clipboard.writeText(j.ticket); toast("Copied “"+title+"”"); }catch(_){ toast("Copy failed"); }
+      });
+      row.querySelector("[data-del]").addEventListener("click", async()=>{
+        if(!confirm("Remove this job from the log?")) return;
+        await removeJob(j.id); toast("Removed from log"); renderLog();
+      });
+      list.appendChild(row);
+    });
+  }
+
+  function buildJob(){
+    const ticket = render();
+    const prods = getProducts();
+    const total = prods.reduce((s,p)=>{ const n=parseInt((p.qty||"").replace(/[^\d]/g,""),10); return s+(isNaN(n)?0:n); },0);
+    const first = prods[0] ? (prods[0].name || prods[0].vendor || "Product") : "";
+    const itemLabel = prods.length>1 ? (first+" +"+(prods.length-1)+" more") : first;
+    return {
+      id: Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+      ts: Date.now(),
+      created: stamp(new Date()),
+      customer: v("custName"),
+      item: itemLabel,
+      qty: total ? String(total) : "",
+      due: v("inHand") || v("quoteDue"),
+      rush: toggles.rush==="YES",
+      ticket,
+      form:captureForm()
+    };
+  }
+
+  /* ---- email (Web3Forms) ---- */
+  function emailConfigured(){
+    const k = CONFIG.WEB3FORMS_ACCESS_KEY || "";
+    return !/PASTE_YOUR/i.test(k) && k.trim().length > 8;
+  }
+  function ccList(){
+    return (CONFIG.TEAM_EMAILS||"").split(",").map(s=>s.trim()).filter(Boolean);
+  }
+  async function emailTeam(job){
+    if(!emailConfigured()) return {ok:false, reason:"Email not set up"};
+    const payload = {
+      access_key: CONFIG.WEB3FORMS_ACCESS_KEY.trim(),
+      from_name: CONFIG.FROM_NAME || "Job Intake",
+      subject: (job.rush?"RUSH — ":"") + "New job: " + (job.customer || job.item || "Untitled"),
+      message: job.ticket
+    };
+    const cc = ccList();
+    if(cc.length) payload.cc = cc;
+    try{
+      const res = await fetch("https://api.web3forms.com/submit",{
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json().catch(()=>({}));
+      return {ok: res.ok && data.success!==false, reason: data.message || ("HTTP "+res.status)};
+    }catch(e){ return {ok:false, reason:(e && e.message) || "network error"}; }
+  }
+  function refreshMailStatus(){
+    const on = emailConfigured(), n = ccList().length;
+    $("mdot").classList.toggle("on", on);
+    if(on){
+      $("mailStatus").textContent = (CONFIG.EMAIL_ON_SAVE ? "Auto-email on" : "Email ready")
+        + " — CC to " + n + " teammate" + (n===1?"":"s");
+      $("save").textContent = CONFIG.EMAIL_ON_SAVE ? "Save & email team" : "Save to Job Log";
+    } else {
+      $("mailStatus").textContent = "Email not set up — add your key in the file";
+      $("save").textContent = "Save to Job Log";
+    }
+  }
+
+  $("save").addEventListener("click", async()=>{
+    const err = validateCustomer();
+    if(err){ toast(err); return; }
+    const job = buildJob();
+    await saveJob(job);
+    localStorage.removeItem(DRAFT_KEY);
+    renderLog();
+    if(CONFIG.EMAIL_ON_SAVE && emailConfigured()){
+      toast("Saved — emailing team…");
+      const r = await emailTeam(job);
+      toast(r.ok ? "Saved & emailed to team ✓" : ("Saved. Email failed: "+r.reason));
+    } else {
+      toast("Saved to Job Log");
+    }
+  });
+
+  $("emailBtn").addEventListener("click", async()=>{
+    if(!emailConfigured()){ toast("Add your Web3Forms key in the file first — see Email setup"); return; }
+    const err = validateCustomer();
+    if(err){ toast(err); return; }
+    toast("Emailing team…");
+    const r = await emailTeam(buildJob());
+    toast(r.ok ? "Emailed to team ✓" : ("Email failed: "+r.reason));
+  });
+
+  $("testEmail").addEventListener("click", async()=>{
+    if(!emailConfigured()){ toast("Add your Web3Forms access key in the file — see Email setup"); return; }
+    toast("Sending test…");
+    const r = await emailTeam({rush:false, customer:"TEST — please ignore",
+      ticket:"This is a test from the Fully Promoted job intake form.\nIf you received this, auto-email is working."});
+    toast(r.ok ? "Test sent ✓ — check inboxes" : ("Test failed: "+r.reason));
+  });
+
+  /* ---- boot ---- */
+  (async function boot(){
+    if(!(window.storage && await storeAvailable())){ SHARED=false; markLocal(); }
+    initProducts();
+    refreshMailStatus();
+    if(!restoreDraft()) render();
+    renderLog();
+  })();
+})();
+</script>
