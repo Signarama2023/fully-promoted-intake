@@ -1081,7 +1081,8 @@
       });
       const data = await res.json().catch(()=>({}));
       const ok = res.ok && (data.success===true || String(data.success)==="true");
-      return {ok, reason: data.message || ("HTTP "+res.status)};
+      const reason = data.message || ("HTTP "+res.status);
+      return {ok, needsActivation: /activat/i.test(reason), reason};
     }catch(e){ return {ok:false, reason:(e && e.message) || "network error"}; }
   }
   function refreshMailStatus(){
@@ -1107,7 +1108,9 @@
     if(CONFIG.EMAIL_ON_SAVE && emailConfigured()){
       toast("Saved — emailing team…");
       const r = await emailTeam(job);
-      toast(r.ok ? "Saved & emailed to team ✓" : ("Saved. Email failed: "+r.reason));
+      toast(r.ok ? "Saved & emailed to team ✓"
+        : r.needsActivation ? "Saved. One-time setup: click the ‘Activate Form’ link emailed to you, then resend."
+        : ("Saved. Email failed: "+r.reason));
     } else {
       toast("Saved to Job Log");
     }
@@ -1119,7 +1122,9 @@
     if(err){ toast(err); return; }
     toast("Emailing team…");
     const r = await emailTeam(buildJob());
-    toast(r.ok ? "Emailed to team ✓" : ("Email failed: "+r.reason));
+    toast(r.ok ? "Emailed to team ✓"
+      : r.needsActivation ? "One-time setup: click the ‘Activate Form’ link emailed to you, then resend."
+      : ("Email failed: "+r.reason));
   });
 
   $("testEmail").addEventListener("click", async()=>{
@@ -1127,7 +1132,9 @@
     toast("Sending test…");
     const r = await emailTeam({rush:false, customer:"TEST — please ignore",
       ticket:"This is a test from the Fully Promoted job intake form.\nIf you received this, team email is working."});
-    toast(r.ok ? "Test sent ✓ — check inboxes" : ("Test failed: "+r.reason));
+    toast(r.ok ? "Test sent ✓ — check inboxes"
+      : r.needsActivation ? "Almost there: click the ‘Activate Form’ link emailed to you, then Send test again."
+      : ("Test failed: "+r.reason));
   });
 
   /* ---- boot ---- */
