@@ -725,12 +725,12 @@
     if(v("catPref")) L.push(pad("Preference", v("catPref")));
     if(v("logo")) L.push(pad("Logo (all)", v("logo")));
     const prods = getProducts();
-    const sub = (label,val)=> "       " + (label+":").padEnd(13) + (val||"—");
+    const sub = (label,val)=> "       " + (label+":").padEnd(19) + (val||"—");
     if(prods.length){
       prods.forEach((p,i)=>{
         L.push("");
         L.push("  "+(i+1)+") "+(p.name || "(unnamed product)"));
-        L.push(sub("Vendor", p.vendor || "— unassigned —"));
+        L.push(sub("Product vendor", p.vendor || "— unassigned —"));
         const specs=[];
         if(p.color||p.size) specs.push([p.color,p.size].filter(Boolean).join(" / "));
         if(p.qty) specs.push("Qty "+p.qty);
@@ -738,9 +738,9 @@
         const deco=[];
         if(p.method) deco.push(p.method);
         if(p.impColors) deco.push(p.impColors+" clr");
-        L.push(sub("Decoration", deco.length?deco.join("   ·   "):""));
-        L.push(sub("Deco vendor", p.decoVendor || "— unassigned —"));
-        if(p.impLoc) L.push(sub("Location", p.impLoc));
+        L.push(sub("Decoration method", deco.length?deco.join("   ·   "):""));
+        L.push(sub("Decoration vendor", p.decoVendor || "— unassigned —"));
+        if(p.impLoc) L.push(sub("Imprint location", p.impLoc));
       });
     } else {
       L.push(pad("Products", ""));
